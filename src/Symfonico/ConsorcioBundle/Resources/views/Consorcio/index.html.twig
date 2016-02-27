@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+
+
+{% block body -%}
+    
+    {{ include('default/_flash_messages.html.twig') }}
+
+    <h1>Consorcio list</h1>
+
+    <table class="records_list" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Slug</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('configuracion_consorcio_show', { 'slug': entity.slug }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.slug }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('configuracion_consorcio_show', { 'slug': entity.slug }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('configuracion_consorcio_edit', { 'slug': entity.slug }) }}">edit</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('configuracion_propiedad', { 'consorcioSlug': entity.slug }) }}">Propiedades</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <div class="navigation text-center">
+                        {{ knp_pagination_render(entities) }}
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('configuracion_consorcio_new') }}">
+                Agregar un Consorcio
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

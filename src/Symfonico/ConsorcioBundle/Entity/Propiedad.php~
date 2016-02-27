@@ -1,0 +1,201 @@
+<?php
+
+namespace Symfonico\ConsorcioBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
+
+use AppBundle\Entity\Traits\DateTimeTrait;
+use AppBundle\Entity\Traits\IdentifiableTrait;
+
+/**
+ * Propiedad
+ *
+ * @ORM\Table(name="consorcios_propiedades")
+ * @ORM\Entity(repositoryClass="Symfonico\ConsorcioBundle\Repository\PropiedadRepository")
+ */
+class Propiedad
+{
+    use DateTimeTrait;
+    use IdentifiableTrait;
+
+    /**
+     * @var Consorcio
+     * @ORM\ManyToOne(
+     *      targetEntity = "Consorcio", 
+     *      inversedBy = "propiedades"
+     * )
+     * @ORM\JoinColumn(
+     *      name = "consorcio_id",
+     *      referencedColumnName = "id"
+     * )
+     **/
+    protected $consorcio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name = "denominacion", type = "string", length = 60, nullable = false, options = {"default" = 0})
+     */
+    protected $denominacion;
+
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente1", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente1 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente2", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente2 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente3", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente3 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente4", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente4 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente5", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente5 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente6", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente6 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente7", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente7 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente8", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente8 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente9", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente9 = 0;
+
+        /**
+     * @var float
+     *
+     * @ORM\Column(name="coeficiente10", type="decimal", scale=6, precision=7, nullable=false, options={"default" = 0})
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1,
+     *      minMessage = "El mínimo es 0",
+     *      maxMessage = "El máximo es 1"
+     * )
+     */
+    protected $coeficiente10 = 0;
+
+  
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        //Initialize product as a Doctrine Collection
+        $this->consorcio = new ArrayCollection();   
+    }
+
+    /**
+     * @Assert\True(message = "Por favor, complete uno de los siguientes campos: Piso, Depto, Otros.")
+     */
+    public function isDenominationLegal()
+    {
+        //var_dump(!$this->getPiso());exit; 
+        return (!empty($this->getDenominacion()) || !empty($this->getTipo()));
+    }
+
+    public function __toString()
+    {
+        return strval($this->getDenominacion);
+    }
+
+}

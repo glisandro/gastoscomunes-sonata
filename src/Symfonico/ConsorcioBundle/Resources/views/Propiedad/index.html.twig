@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Propiedad list</h1>
+
+    <table class="records_list" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Denominacion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="">{{ entity.id }}</a></td>
+                <td>{{ entity.denominacion }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="">show</a>
+                    </li>
+                    <li>
+                        <a href="">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    <div class="navigation text-center">
+                        {{ knp_pagination_render(entities) }}
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('configuracion_propiedad_new', { 'consorcioSlug': consorcio.slug }) }}">    
+                Agregar Propiedad
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
